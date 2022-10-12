@@ -67,7 +67,7 @@ button {
   height: auto;
 }
 
-@media screen, (max-width: 400px) {
+@media screen and (max-width: 400px) {
   .title {
     font-size: 36px;
   }
@@ -83,7 +83,6 @@ button {
   .logo {
     width: 100px;
   }
-
   .footer_text {
     font-size: 12px;
   }
