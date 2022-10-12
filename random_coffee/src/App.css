@@ -1,0 +1,68 @@
+body {
+  background-color:#0d1319;
+  color: #edece1;
+  text-align: center;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order {
+  border: 2px dotted #cb8d21;
+  background-color: #edece1;
+  border-radius: 10px;
+  width: 25%;
+  margin: 20px;
+  padding: 10px;
+}
+
+.title {
+  font-size: 48px;
+  font-family: 'Lora', serif;
+
+}
+
+.subtitle {
+  font-size: 36px;
+  font-family: 'Lora', serif;
+  color: #0d1319;
+
+}
+
+.attribute {
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  color: #0d1319;
+
+}
+
+button {
+  height: 50px;
+  width: 100px;
+  border-radius: 10px;
+  color: #363636;
+  font-weight: bold;
+  background-color:#cb8d21 ;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  color: azure;
+}
+
+.footer_text {
+  margin-bottom: 5px;
+}
+.copyright {
+  margin-top: 0px;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
