@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import logo from './assets/jllogo.png'
 import './App.css'
 import { findByPlaceholderText } from '@testing-library/react'
@@ -9,9 +9,18 @@ function App() {
   const [addShot, setAddShot] = useState('Shots')
   const [milk, setMilk] = useState('Milk')
   const [flavor1, setFlavor1] = useState('Flavor')
-  const [flavor2, setFlavor2] = useState('')
-  const [mod1, setMod1] = useState('Mod ')
-  const [mod2, setMod2] = useState('')
+  const [flavor2, setFlavor2] = useState('Flavor2')
+  const [mod1, setMod1] = useState('Mod')
+  const [mod2, setMod2] = useState('Mod2')
+
+  const [lastSize, setLastSize] = useState('')
+  const [lastDrinkType, setLastDrinkType] = useState('')
+  const [lastAddShot, setLastAddShot] = useState('')
+  const [lastMilk, setLastMilk] = useState('')
+  const [lastFlavor1, setLastFlavor1] = useState('')
+  const [lastFlavor2, setLastFlavor2] = useState('')
+  const [lastMod1, setLastMod1] = useState('')
+  const [lastMod2, setLastMod2] = useState('')
 
   let sizeOptions = ['Small', 'Medium', 'Large']
 
@@ -99,20 +108,20 @@ function App() {
     'Toffee Sprinkles',
     'Half Flavor',
     'Extra Syrup',
-    'No Mods',
     'Extra Foam',
     'No Foam',
     '1 Sugar Packet'
   ]
 
   const buildDrink = () => {
+    let sizeChoice = sizeOptions[Math.floor(Math.random() * sizeOptions.length)]
     let flavorChoice =
       flavorOptions[Math.floor(Math.random() * flavorOptions.length)]
     let modChoice = modOptions[Math.floor(Math.random() * modOptions.length)]
     let flavorChoice2 =
       flavorOptions[Math.floor(Math.random() * flavorOptions.length)]
     let modChoice2 = modOptions[Math.floor(Math.random() * modOptions.length)]
-    setSize(sizeOptions[Math.floor(Math.random() * sizeOptions.length)])
+    setSize(sizeChoice)
     setDrinkType(typeOptions[Math.floor(Math.random() * typeOptions.length)])
     setAddShot(
       `Add ${shotOptions[Math.floor(Math.random() * shotOptions.length)]}`
@@ -136,10 +145,36 @@ function App() {
     } else setMod2(` & ${modChoice2}`)
   }
 
+  const logDrink = () => {
+    setLastSize(size)
+    setLastFlavor1(flavor1)
+    setLastFlavor2(flavor2)
+    setLastDrinkType(drinkType)
+    setLastAddShot(addShot)
+    setLastMilk(milk)
+    setLastMod1(mod1)
+    setLastMod2(mod2)
+  }
+
+  const handleClick = () => {
+    buildDrink()
+    logDrink()
+  }
+
+  const revertDrink = () => {
+    setSize(lastSize)
+    setFlavor1(lastFlavor1)
+    setFlavor2(lastFlavor2)
+    setDrinkType(lastDrinkType)
+    setAddShot(lastAddShot)
+    setMilk(lastMilk)
+    setMod1(lastMod1)
+    setMod2(lastMod2)
+  }
+
   return (
     <div className="App">
       <h1 className="title">Mystery Coffee Order</h1>
-      <button onClick={buildDrink}>BUILD</button>
       <div className="order">
         <h1 className="subtitle">Your Drink:</h1>
         <p className="attribute">{size}</p>
@@ -155,7 +190,8 @@ function App() {
           {mod2}
         </p>
       </div>
-      <button onClick={buildDrink}>REDO</button>
+      <button onClick={handleClick}>BUILD</button>
+      <button onClick={revertDrink}>PREVIOUS</button>
       <div className="footer">
         <a href="https://joshua-langner.com">
           <p className="footer_text">This website was developed by</p>
