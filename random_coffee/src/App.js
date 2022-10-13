@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import logo from './assets/jllogo.png'
 import './App.css'
+import { findByPlaceholderText } from '@testing-library/react'
 
 function App() {
   const [size, setSize] = useState('Size')
@@ -38,11 +39,11 @@ function App() {
   ]
 
   let flavorOptions = [
-    'Plain',
+    'No Flavor',
     'Almond',
     'Amaretto',
     'Butterscotch',
-    'Plain',
+    'No Flavor',
     'Caramel',
     'Cinnamon',
     'Cinnamon Bun',
@@ -52,20 +53,18 @@ function App() {
     'French Vanilla',
     'Gingerbread',
     'Green Mint',
-    'Plain',
+    'No Flavor',
     'Hazelnut',
-    'Turkish Hazelnut',
     'Irish Cream',
     'Macadamia Nut',
     'Maple Spice',
-    'Mojito',
     'Peanut Butter',
     'Peppermint',
     'Pumpkin Pie',
     'Pistachio',
     'Salted Caramel',
     'Toasted Marshmallow',
-    'Plain',
+    'No Flavor',
     'Toffee Nut',
     'Vanilla',
     'Ghirardelli Chocolate Sauce',
@@ -77,7 +76,7 @@ function App() {
     'SF Coconut',
     'SF Gingerbread',
     'SF Hazelnut',
-    'Plain',
+    'No Flavor',
     'SF Irish Cream',
     'SF Macadamia Nut',
     'SF Vanilla',
@@ -87,26 +86,32 @@ function App() {
   let modOptions = [
     'No Mods',
     'Whip',
+    'Double Whip',
     'Caramel Drizzle',
+    'Double Caramel Drizzle',
     'Shots on Top',
     'Chocolate Drizzle',
+    'Double Chocolate Drizzle',
     'White Chocolate Drizzle',
     'Cinnamon Sprinkle',
     'No Mods',
     'Nutmeg Sprinkle',
-    'Sprinkles',
     'Toffee Sprinkles',
     'Half Flavor',
     'Extra Syrup',
     'No Mods',
     'Extra Foam',
-    'No Foam'
+    'No Foam',
+    '1 Sugar Packet'
   ]
 
   const buildDrink = () => {
     let flavorChoice =
       flavorOptions[Math.floor(Math.random() * flavorOptions.length)]
     let modChoice = modOptions[Math.floor(Math.random() * modOptions.length)]
+    let flavorChoice2 =
+      flavorOptions[Math.floor(Math.random() * flavorOptions.length)]
+    let modChoice2 = modOptions[Math.floor(Math.random() * modOptions.length)]
     setSize(sizeOptions[Math.floor(Math.random() * sizeOptions.length)])
     setDrinkType(typeOptions[Math.floor(Math.random() * typeOptions.length)])
     setAddShot(
@@ -117,16 +122,18 @@ function App() {
     )
     setFlavor1(flavorChoice)
     setMod1(`Add ${modChoice}`)
-    if (flavorChoice === 'Plain') {
+    if (flavorChoice === 'No Flavor' || flavorChoice === flavorChoice2) {
       setFlavor2('')
-    } else
-      setFlavor2(
-        ` & ${flavorOptions[Math.floor(Math.random() * flavorOptions.length)]}`
-      )
-    if (modChoice === 'No Mods') {
+    } else if (flavorChoice2 === 'No Flavor') {
+      setFlavor2('')
+    } else setFlavor2(` & ${flavorChoice2}`)
+    if (
+      modChoice === 'No Mods' ||
+      modChoice2 === 'No Mods' ||
+      modChoice === modChoice2
+    ) {
       setMod2('')
-    } else
-      setMod2(` & ${modOptions[Math.floor(Math.random() * modOptions.length)]}`)
+    } else setMod2(` & ${modChoice2}`)
   }
 
   return (
@@ -150,11 +157,11 @@ function App() {
       </div>
       <button onClick={buildDrink}>REDO</button>
       <div className="footer">
-        <p className="footer_text">This wrbsite was developed by</p>
         <a href="https://joshua-langner.com">
+          <p className="footer_text">This website was developed by</p>
           <img src={logo} className="logo" />
+          <p className="copyright">©2022 All rights reserves.</p>
         </a>
-        <p className="copyright">©2022 All rights reserves.</p>
       </div>
     </div>
   )

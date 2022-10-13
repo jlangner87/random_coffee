@@ -4,6 +4,15 @@ body {
   text-align: center;
 }
 
+a {
+  color: #edece1;
+  text-decoration: none
+}
+
+a:visited {
+  color:#edece1;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -12,7 +21,7 @@ body {
 }
 
 .order {
-  border: 2px dotted #cb8d21;
+  border: 4px solid #cb8d21;
   background-color: #edece1;
   border-radius: 10px;
   width: 25%;
@@ -67,7 +76,7 @@ button {
   height: auto;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 700px) {
   .title {
     font-size: 36px;
   }
