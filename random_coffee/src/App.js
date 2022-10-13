@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import logo from './assets/jllogo.png'
+import printLogo from './assets/black_header.png'
 import './App.css'
-import { findByPlaceholderText } from '@testing-library/react'
 
 function App() {
   const [size, setSize] = useState('Size')
@@ -190,8 +190,34 @@ function App() {
           {mod2}
         </p>
       </div>
-      <button onClick={handleClick}>BUILD</button>
-      <button onClick={revertDrink}>PREVIOUS</button>
+      <div className="button_container">
+        <button onClick={handleClick}>BUILD</button>
+        <button onClick={revertDrink}>PREVIOUS</button>
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText([
+              size,
+              flavor1,
+              flavor2,
+              drinkType,
+              addShot,
+              milk,
+              mod1,
+              mod2
+            ])
+          }}
+        >
+          COPY
+        </button>
+        <button onClick={() => window.print()}>PRINT</button>
+      </div>
+      <div className="print_footer">
+        <a href="https://joshua-langner.com">
+          <p className="footer_text">This website was developed by</p>
+          <img src={printLogo} className="logo" />
+          <p className="copyright">©2022 All rights reserves.</p>
+        </a>
+      </div>
       <div className="footer">
         <a href="https://joshua-langner.com">
           <p className="footer_text">This website was developed by</p>
